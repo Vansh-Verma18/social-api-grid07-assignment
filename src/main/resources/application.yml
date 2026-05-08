@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: social-api
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/socialdb
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    defer-datasource-initialization: true
+  
+  sql:
+    init:
+      mode: always
+  
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 60000ms
+
+server:
+  port: 8081
+
+# Application specific configurations
+app:
+  redis:
+    horizontal-cap: 100
+    vertical-cap: 20
+    cooldown-minutes: 10
+    notification-cooldown-minutes: 15
+  scheduler:
+    notification-sweep-cron: "0 */5 * * * *"  # Every 5 minutes
